@@ -442,3 +442,591 @@ df3 = pd.merge(df1, df2)
 df4 = pd.DataFrame({"group": ["accounting", "engineering", "hr"],
                    "manager": ["Caner", "Mustafa", "Berkcan"] })
 pd.marge(df3, df4)
+
+
+#VERİ GÖRSELLEŞTİRME: MATPLOTLİB SEABORN
+#Matplot Library: düşük seviyeli veri görselleştirme aracıdır. veri görselleştirme yapmak için çok çaba gerektirir.
+#powerBI gibi iş zekası araçları veri görselleştimeye daha uygundur.
+#SEABORN:
+
+######SÜTÜN GRAFİĞİ:
+#Elinde kategorik değişken varsa kullan.
+#Bunuyapmak için matplotlib de; countplot ile gerçekleştirilir.
+#bunu yapmak için seaborn da; bar ile gerçekleştirilir.
+
+######HİSTOGRAM (HİS) ve BOXPLOT(Kutu Grafik)
+#sayısal değişkenler olduğunda bu iki grafik kullanılır.
+#böylece veri dağılımını görmüş oluruz.
+
+
+#Kategorik Değişken Görselleştirme
+#value_counts(): ilgili kategorik değişkeni betimler.
+import pandas as pd
+import seaborn as sns
+import matplotlib.pyplot as plt
+pd.set_option("display.max_columns", None)
+pd.set_option("display.width", 500)
+df = sns.load_dataset("titanic")
+df.head()
+#plot dediğimde bunun çizdir demiş oluyorum aslında. ne tipde çizeceğinide kind= diyip tür bilgisini ver.
+df["sex"].value_counts().plot(kind="bar")
+plt.show() #grafiği ekrana yazdırmak istediğimde
+
+#SAYISAL DEĞİŞKEN GÖRSELLEŞTİRME
+#1.HİSTOGRAM GRAFİK KULLANARAK YAPALIM,sayısal değişkenlerinin dağılımını verir.
+#plt.hist(görselleştirmek istediğin değişkeni yaz)
+plt.hist(df["age"])
+plt.show()
+
+#2.BOXPLOT
+plt.boxplot(df["fare"])
+plt.show()
+
+#MATPLOTLİB ÖZELLİKLERİ
+import numpy as np
+import pandas as pd
+import  matplotlib.pyplot as plt
+pd.set_option("display.max_columb",None)
+pd.set_option("display.width", 500)
+
+#plot özelliği: veriyi görselleştirmek için kullandığımız fonksiyonlardan birisidir.
+x=np.array([1,8])
+y = np.array([8,150])
+plt.plot(x,y)
+plt.show()
+#değerlerin olduğu yere nokta koymak için "o" değerini gir.
+plt.plot(x, y, "o")
+plt.plot(x,y)
+plt.show()
+
+#marker özelliği: işaretleyici özelliğidir.
+y = np.array([13,28, 11, 100])
+#diyelim ki y noktalarına daire koymak istiyorum yani marker ile işaretlemek istiyorum.
+plt.plot(y, marker="o")
+plt.show()
+
+plt.plot(y, marker="*")
+plt.show()
+
+#markers tipleri;
+#o, *, ., , , x, X, +, P, s, D, d, p,H,h
+
+#line-çizgi özelliği
+y = np.array([13,28, 11, 100])
+plt.plot(y, linestyle = "dotted", color = "r")
+plt.show()
+#temelde 3 tane çizgi tipi var: dotted, linestyle, dashsot
+#çizgiye renk özelliği vermek istiyorsan colar argümanını tanımla.
+
+#Multiple Line
+x=np.array([2, 4, 6, 8, 10])
+y = np.array([1, 3, 5, 7, 9])
+plt.plot(x)
+plt.plot(y)
+plt.show
+
+#LABELS (Etiketler)
+x=np.array([80, 85, 90, 95, 100])
+y = np.array([240, 250, 260, 270, 280])
+plt.plot(x,y)
+plt.title("grafiğe ne başlık vermek istiyorsan onu yaz")
+#x ekseninde isimlendirme yapmak istersek
+plt.xlabel
+#y ekseninde isimlendirme
+plt.ylabel
+#grafiğin arka tarafına ızgara koymak için
+plt.grid()
+#son olarak her zaman plt.show() diyerek görselleştir.
+plt.show()
+
+#subplots özelliği; birlikte birden fazla görselin gösterilmeye çalışması
+#elimizde yer alan 2 görselin (plot1 ve plot2) görselleştirilmesini yapalım.
+###plot 1
+x=np.array([80, 85, 90, 95, 100])
+y = np.array([240, 250, 260, 270, 280])
+#plt.subplot(a satırlı, b sütunlu grafik oluştur, şuan bunun c.grafiğini oluşturuyorum)
+plt.subplot(1,2,1)
+plt.title("1")
+plt.plot(x,y)
+plt.show()
+
+###plot2
+x=np.array([80, 85, 90, 95, 100])
+y = np.array([240, 250, 260, 270, 280])
+plt.subplot(1,2,2)
+plt.title("2")
+plt.plot(x,y)
+plt.show()
+
+############# SEABORN İLE VERİ GÖRSELLEŞTİRME
+#yüksek seviyeli veri görselleştirmek için kullanılan kütüphanedir. daha kısa zamanda çok iş yapar.
+#seaborn ile kategorik değişkenleri görselleştirme
+import pandas as pd
+import seaborn as sns
+from matplotlib import pyplot as plt
+df=sns.load_dataset("tips")
+df.head()
+
+df["sex"].value_counts()
+#countplot(verinin adı, ilgili veri setini gir)///// aynı zamanda hanigi eksende nerede oldugunu belirtlmelisin
+sns.countplot(x = df["sex"], data= df)
+plt.show()
+
+#seaborn ile sayısal değişkenleri görselleştirme
+sns.boxplot(x=df["total_bill"])
+plt.show()
+
+df["total_bill"].his()
+plt.show()
+
+#GELİŞMİŞ FONKSİYONEL KEŞİFCİ DEĞİŞKEN ANALİZİ
+#amaç elimizdeki verileri fonksiyonel tarzda işleyebilmeyi, veriler hakkında hızlı bir içgörü elde etmeyi sağlar.
+#hızlı bir şekilde genel fonksiyonlar ile elimizdeki verileri analiz etmek
+#1.Genel Resim
+#veri setinin dış ve iç özelliklerini genel haliyle bilmek. kaç gözlem, kaç değişken, değişken tiplerini vs var.
+#2.Kategorik Değişken Analizi
+#3.Sayısal Değişken Analizi
+#4.Hedef Değişken Analizi
+#5.Korelasyon Analizi
+
+#1.Genel Resim
+import numpy as np
+import pandas as pd
+import seaborn as sns
+import matplotlib.pyplot as plt
+pd.set_option("display.max_columns", None)
+pd.set_option("display.width", 500)
+ddf = sns.load_dataset("titanic")
+df.head()
+df.tail()
+df.shape
+df.info()
+df.columns
+df.index
+#sayısal değişkenleri betimleme
+df.describe().T
+#eksik değer var mı yok mu?
+df.isnull().values.any()
+#veri setindeki eksik değer sayısını veren fonksiyon
+df.isnull().sum()
+
+#yaptiğimiz değişiklikler nasıl gözüküyor. bunun için fonskiyon yazalım
+#BÖYLECE GENEL RESMİ GÖRMÜŞ OLACAĞIZ
+def check_df(dataframe,  head=5):
+    print("######SHAPE#######")
+    print(dataframe.shape)
+    #değişkenlerdeki tip bilgisini sorgulamak için
+    print(dataframe.dtypes)
+    print( "######SHAPE#######")
+    print(dataframe.head(head))
+    print( "######SHAPE#######")
+    print(dataframe.tail(head))
+    print( "######SHAPE#######" )
+    print(fataframe.isnull().sum())
+    print( "######SHAPE#######" )
+    print(dataframe.describe([0,0.05, 0.50, 0.95, 0.99, 1]).T)
+check_df(df)
+
+# yeni bir veri seti getirip, yukarıdaki fonksiyonla okutmak istiyorum diyelim.
+check_df(df)
+df = sns.load_dataset("tips")
+check_df(df)
+
+#KATEGORİK DEĞİŞKEN ANALİZİ
+import numpy as np
+import pandas as pd
+import seaborn as sns
+import matplotlib as plt
+pd.set_option("display.max_columns",None)
+pd.set_option("display.width", 500)
+df = sns.load_dataset("titanic")
+df.head()
+#tek bir değişkeni analiz etmek istediğinde, hangi özelliği elde etmek istiyorsak onunla çağırırız.
+df["embarked"].value_counts()
+df["sex"].unique()
+#toplamda kaçç tane eşşsiz sınıf var.
+df["sex"].nunique()
+
+#veri setinde çok fazla değişen olduğunda tek tek ele almam zor.
+#diyelim ki veri seti içinden otomatikmen tüm kategorik değişkenleri seçsin istiyorum.
+#bunu yaparken hem tip bilgisine göre yapacağız hem de tip bilgisi farklı olduğu halde kategorik olan değişkenleri yakalamamız lazım.
+cat_cols = [col for col in df.columns if str(df[col].dtypes) in ["category, object, bool"]]
+
+
+#veri setindeki bazı değişkenler var ki onları yakalamak zor. kategorik olmasına rağmen bir önceki fonskiyonla bazı değişkenleri yakalayamayız.
+#mesela "survived" değişekni 0-1 lerden oluştuğu için bunu yakalamak zor. bu ve bunun gibiler için farklı bir method geliştirmelisin:
+#10' dan küçük eşsiz sınıf sayısına sahip olan VE tipleri int-float ise bu benim için "NUMERİK GÖRÜNÜMLÜ KATEGORİK DEĞİŞKENDİR" diye bir algoritma kuruyorum.
+num_but_cat = [col for col in df.columns if df[col].nunique() <10 and df[col].dtypes in ["int","float"]]
+
+#object ve category türde olup sınıf sayısı çok fazla olan değişkenler olabilir.
+#bunlara "cardinelesi yüksek değişkenler" denir.
+cat_but_car = [col for col in df.columns if df[col].nunique() > 20 and str(df[col].dtypes) in ["category", "object"]]
+
+#cat_cols ve num_but_cat aynı şey o zaman ekle üzerine
+cat_cols = cat_cols + num_but_cat
+
+# eğer aynı şey olmasaydı o zaman çıkarma yapmalıydın.
+cat_cols = [col for col in cat_cols if col not in cat_but_car]
+
+df[cat_cols]
+
+#seçtiğimiz değişkenlerin eşsiz sınıf saysına bakalım
+df[cat_cols].nunique()
+
+#cat_cols içerisinde olmayanlara bakalım.
+[col for col in df.columns if col not in cat_cols]
+
+#şimdi seçtiklerimize bir fonksiyon yazalım. Nasıl;
+# fonskdsiyona girilen değerlerin value_counts() alsın. Hangi sınıftan kaçar tane var.
+df["survived"].value_counts()
+#sınıfların yüzdelik bilgisini yazdır.
+100 * df["survived"].value_counts() /len(df)
+
+
+def cat_summary(dataframe, col_name):
+    print(pd.DataFrame({col_name: dataframe[col_name].value_counts(),
+                        "Ratio": 100* dataframe[col_name].value_counts() / len(dataframe)}))
+    print("#################")
+#değişkenleri aratmak için
+cat_summary(df,"sex")
+#binlerce değişken arasından tek tek aratmak çok zor iş bu nedenle;
+ for col in cat_cols:
+     cat_summary(df, col)
+
+#CAT_SUMMARY FONKSİYONUNA GRAFİK ÖZELLİĞİNİDE EKLEYELİM.
+#plot ön tanımlı olarak false yaptım
+def cat_summary(dataframe, col_name, plot = False):
+    print( pd.DataFrame( {col_name: dataframe[col_name].value_counts(),
+                          "Ratio": 100 * dataframe[col_name].value_counts() / len( dataframe )} ) )
+print("#################")
+
+
+
+#eğer plot açıksa;
+    if plot:
+        sns.countplot(x=dataframe[col_name], data=dataframe)
+        plt.show(block=True)
+cat_summary(df, "sex", plot=True)
+
+for col in cat_cols:
+    if df[col].dtypes == "bool":
+        print("veri görselleştirilmiyor")
+    else:
+          cat_summary(df, col, plot=True)
+
+
+
+#adult_male verisi true-false oluşuyor. bunu astype ile 1-0 lara çevir.
+df["adult_male"].astype(int)
+
+#şimdi bu işlemi fonskiyonel olarak yapalım.
+for col in cat_cols:
+    if df[col].dtypes == "bool":
+        df[col] = df[col].astype(int)
+        cat_summary( df, col, plot=True )
+    else:
+          cat_summary(df, col, plot=True)
+
+
+#################Sayısal Değişken Analizi
+import numpy as np
+import pandas as pd
+import seaborn as sns
+import matplotlib.pyplotas plt
+pd.set_option("display.max_columns", None)
+pd.set_option("display.width", 500)
+df= sns.load_dataset("titanic")
+df.head()
+#AGE VE FARE değişkenlerinin betimsel istatistiklerine ulaşmak istiyorum.
+df[["age", "fare"]].describe().T
+num_cols = [col for col in df.columns if df[col].dtypes in ["int", "float"]]
+num_cols = [col for col in num_cols if col not in cat_cols]
+
+def num_summary(dataframe, numerical_col):
+    quantiles=[0.05, 0.10, 0.20, 0.30, 0.40, 0.50, 0.60, 0.70]
+    print(dataframe[numerical_col].describe(quantiles).T)
+
+num_summary(df, "age")
+
+#daha fazla sayıda değişken olduğunda böyle tek tek sorgulama yapmak zor o yüzden döngü yaz.
+for col in num_cols:
+    num_summary(df,col)
+
+def num_summary(dataframe, numerical_col):
+    quantiles = [0.05, 0.10, 0.20, 0.30, 0.40, 0.50, 0.60, 0.70]
+    print( dataframe[numerical_col].describe( quantiles ).T )
+
+    if plot:
+        dataframe[numerical_col].hist()
+        plt.xlabel(numerical_col)
+        plt.title(numerical_col)
+        plt.show(block = True)
+    num_summary(df, "age", plot=True)
+
+    for col in num_cols:
+         num_summary(df, col, plot= True)
+
+
+
+######DEĞİŞKENLERİN OTOMATİKMEN YAKALANMASI VE İŞLEMLERİN GENELLEŞTİRİLMESİ
+import numpy as np
+import pandas as pd
+import seaborn as sns
+import matplotlib.pyplotas plt
+pd.set_option("display.max_columns", None)
+pd.set_option("display.width", 500)
+df= sns.load_dataset("titanic")
+df.head()
+df.info()
+
+#bir değişkenin eşsiz sınıf sayısı 10 ve 10 dan azsa categorik değişkendir(cat_th)
+#eğer 20 ve 20 den düşükse cardinal değişken muamelesi yapacağız(car_th)
+#fonksiyona doküman yaz. docstring.
+def grab_col_names(dataframe, cat_th=10, car_th=20):
+    """
+    Veri setindeki kategorik, numerik ve kategorik fakar kardinal değişkenlerin isimlerini verir.
+
+    Parameters
+    ----------
+    dataframe: dataframe
+    değişken isimleri alınmak istenen dataframe dir.
+    cat_th: int, float
+        numerik fakat kategorik olan değişkenler için eşik değeri verir.
+    car_th: int, float
+        kategorik fakat kardinal değişkenler için sınıf eşik değeri
+
+    Returns
+    -------
+    cat_cols:list
+        kategorik değişkenlerin listesi
+    num_cols: list
+        numerik değişkenlerin bir listesi
+    cat_but_car: list
+        kategorik görünümlü kardinal değişken listesi
+
+    Notes
+    ------
+    cat_cols + num_cols + cat_but_car = toplam değişken sayısı
+    num_but_cat cat_cols un içeriisnde
+    """
+#yazmış olduğun docstringi çağır
+    help(grab_col_names)
+
+#cat_cols, cat_but_car
+    cat_cols = [col for col in df.columns if str(df[col].dtypes) in ["category, object, bool"]]
+    num_but_cat = [col for col in df.columns if df[col].nunique() <10 and df[col].dtypes in ["int","float"]]
+    cat_but_car = [col for col in df.columns if df[col].nunique() > 20 and str(df[col].dtypes) in ["category", "object"]]
+    cat_cols = cat_cols + num_but_cat
+    cat_cols = [col for col in cat_cols if col not in cat_but_car]
+
+    num_cols = [col for col in df.columns if df[col].dtypes in ["int", "float"]]
+    num_cols = [col for col in num_cols if col not in cat_cols]
+
+#raporlama yap
+    print(f"Observations: {dataframe.shape[0]}")
+    print(f"Variables: {dataframe.shape[1]}")
+    print(f'cat_cols: {len(cat_cols)}')
+    print(f'num_cols: {len(num_cols)}')
+    print(f'cat_but_car: {len(cat_but_car)}')
+    print(f'num_but_cat: {len(num_but_cat)}')
+
+    return cat_cols, num_col, cat_but_car
+
+
+cat_cols, num_cols, cat_but_car = grab_col_names(df)
+
+def cat_summary(dataframe, col_name):
+    print( pd.DataFrame( {col_name: dataframe[col_name].value_counts(),
+                          "Ratio": 100 * dataframe[col_name].value_counts() } ) )
+print("#################")
+cat_summary((df,  "sex"))
+
+for col in cat_cols:
+    cat_summary(df,col)
+
+
+def num_summary(dataframe, numerical_col):
+    quantiles = [0.05, 0.10, 0.20, 0.30, 0.40, 0.50, 0.60, 0.70]
+    print( dataframe[numerical_col].describe( quantiles ).T )
+
+    if plot:
+        dataframe[numerical_col].hist()
+        plt.xlabel(numerical_col)
+        plt.title(numerical_col)
+        plt.show(block = True)
+
+for col in num_cols:
+    num_summary(df,col, plot=True)
+
+
+#######veri setini oku, tipi değiştir ve görselleştir.
+df = sns.load_dataset("titanic")
+df.info()
+for col in df.columns:
+    if df[col].dtype == "bool":
+        df[col] = df[col].astype(int)
+
+df.info()
+#grab fonskiyonunu çağır
+cat_cols, num_cols, cat_but_car = grab_col_names(df)
+
+def cat_summary(dataframe, col_name, plot = False):
+    print( pd.DataFrame( {col_name: dataframe[col_name].value_counts(),
+                          "Ratio": 100 * dataframe[col_name].value_counts() / len( dataframe )} ) )
+    print("#################")
+    if plot:
+        sns.countplot(x=dataframe[col_name], data=dataframe)
+        plt.show(block=True)
+
+for col in cat_cols:
+    cat_summary(df,col, plot= True)
+
+for col in num_cols:
+    num_summary(df, col, plot=True)
+
+
+#####HEDEF DEĞİŞKEN ANALİZİ
+import numpy as np
+import pandas as pd
+import seaborn as sns
+import matplotlib.pyplot as plt
+pd.set_option("display.max_columns", None)
+pd.set_option("display.width", 500)
+df = sns.load_dataset("titanic")
+
+for col in df.columns:
+    if df[col].dtypes == "bool":
+        df[col] = df[col].astype(int)
+
+def cat_summary(dataframe, col_name, plot = False):
+    print( pd.DataFrame( {col_name: dataframe[col_name].value_counts(),
+                          "Ratio": 100 * dataframe[col_name].value_counts() / len( dataframe )} ) )
+    print("#################")
+    if plot:
+        sns.countplot(x=dataframe[col_name], data=dataframe)
+        plt.show(block=True)
+
+for col in cat_cols:
+    cat_summary(df,col, plot= True)
+
+for col in num_cols:
+    num_summary(df, col, plot=True)
+
+
+def grab_col_names(dataframe, cat_th=10, car_th=20):
+    cat_cols = [col for col in df.columns if str(df[col].dtypes) in ["category, object, bool"]]
+    num_but_cat = [col for col in df.columns if df[col].nunique() <10 and df[col].dtypes in ["int","float"]]
+    cat_but_car = [col for col in df.columns if df[col].nunique() > 20 and str(df[col].dtypes) in ["category", "object"]]
+    cat_cols = cat_cols + num_but_cat
+    cat_cols = [col for col in cat_cols if col not in cat_but_car]
+    num_cols = [col for col in df.columns if df[col].dtypes in ["int", "float"]]
+    num_cols = [col for col in num_cols if col not in cat_cols]
+
+
+    print(f"Observations: {dataframe.shape[0]}")
+    print(f"Variables: {dataframe.shape[1]}")
+    print(f'cat_cols: {len(cat_cols)}')
+    print(f'num_cols: {len(num_cols)}')
+    print(f'cat_but_car: {len(cat_but_car)}')
+    print(f'num_but_cat: {len(num_but_cat)}')
+
+    return cat_cols, num_col, cat_but_car
+
+cat_cols, num_cols, cat_but_car = grab_col_names(df)
+#ilgili hedef değişkeni analiz etmeye geldi sıra. burada hedef değişkenimiz survived()
+df["survived"].value_counts()
+#ya da
+cat_summary(df, "survived")
+
+
+
+##HEDEF DEĞİŞKENİN KATEGORİK DEĞİŞKENLER İLE ANALİZİ
+df.groupby("sex")["survived"].mean()
+
+def target_summary_with_cat(dataframe, target, categorical_col):
+    print(pd.DataFrame({"TARGET_MEAN" : dataframe.groupby(categorical_col)[target].mean()}))
+
+#pclass a göre survived durumunu incele
+target_summary_with_cat(df, "survived", "pclass")
+
+#her değişkeni böyle incelemek zaman alır o yüzden döngü yaz
+for col in cat_cols:
+    target_summary_with_cat(df,"survived", col)
+
+
+#HEDEF DEĞİŞKENİN SAYISAL DEĞŞKENLER İLE ANALİZİ
+#Bu seferde groupby kısmına bağımlı değişkeni, agg ksımına ise bağımsız değişkeni gönder.
+df.groupby("survived")["age"].mean()
+#ya da
+df.groupby("survived").agg({"age": "mean"})
+
+def target_summary_with_num(dataframe, target, numerical_col):
+    print(dataframe.groupby(target).agg({numerical_col: "mean"}), end= "\n\n\n")
+
+target_summary_with_num(df, "survived", "age")
+
+for col in num_cols:
+    target_summary_with_num(df,"survived", col)
+
+
+##KOREALASYON ANALİZİ
+import numpy as np
+import pandas as pd
+import seaborn as sns
+import matplotlib.pyplot as plt
+pd.set_option("display.max_columns", None)
+pd.set_option("display.width", 500)
+df = pd.read_csv("datasets/breast_cancer.csv")
+#gereksiz değişkenlerden kurtulmak istediğimiz için 1 den -1 e kadar git dedik.
+df = df.iloc[:, 1:-1]
+df.head()
+
+num_cols = [col for col in df.columns if df[col].dtype in [int,float]]
+corr = df[num_cols].corr()
+#şimdi bir ısı haritası oluşturalım.
+#oluşturacağımız grafik 12-12 lik olsun istiyorum
+sns.set(rc={"figure.figsize": (12,12)})
+sns.heatmap(corr, cmap = "RdBu")
+plt.show()
+
+#yüksek korelasyonlu değişkenlerin silinmesi
+cor_matrix = df.corr().abs()
+#bu matris de 0-1 in ilişkisi ile 1-0 ın ilişkisi aynı şey ama tabloda 2 yer kaplıyor boş yere.
+#işte bu gereksizlerden kurtulmak lazım.
+
+upper_triangle_matrix = cor_matrix.where(np.triu(np.ones(cor_matrix.shape), k=1).astype(np.bool))
+drop_list = [col for col in upper_triangle_matrix.columns if any(upper_triangle_matrix[col]>0.90) ]
+#yüksek koreasyonlu olanları seçmek için
+cor_matrix[drop_list]
+#yüksek korealsyonlu değerleri silmek için
+df.drop(drop_list, axis=1)
+
+def (high_correlated_cols(dataframe, plot=False, corr_th=0.9):
+    corr=dataframe.corr()
+    cor_matrix = corr.abs()
+    upper_triangle_matrix = cor_matrix.where(np.triu(np.ones(cor_matrix.shape), k=1).astype(np.bool))
+    drop_list = [col for col in upper_triangle_matrix.columns if any(upper_triangle_matrix[col]>)]
+    if plot:
+        import seaborn as sns
+        import matplotlib.pyplot as plt
+        sns.set(rc={"figure.figsize": (15,15)})
+        sns.heatmap(corr, cmap= "RdBu")
+        plt.show()
+    return drop_list
+
+high_correlated_cols(df)
+drop_list = high_correlated_cols(df, plot = True)
+df.drop(drop_list, axis=1)
+
+high_correlated_cols(df.drop(drop_list, axis=1), plot =True)
+
+##yaklaşık 600 mb lık 300 den fazla değişkenin olduğu bir veri setinde deneyelim.
+##kaggle- "train_transection.csv"
+
+df=pd.read_csv("datasets/freud_train_transection.csv")
+len(df.columns)
+df.head()
+drop_list=high_correlated_cols(df, plot=True)
+
+len(df.drop(drop_list, axis=1).columns)
+
