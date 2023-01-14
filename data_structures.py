@@ -104,6 +104,3 @@ set1.issubset(set2)
 
 # issuperset():bir küme diğer kümeyi kapsıyor mu?
 set2.issuperset(set1)
-
-
-
