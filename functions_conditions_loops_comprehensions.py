@@ -1,5 +1,5 @@
-# Fonksiyonları biçimlendirmek için ?prnt gibi yaz ve nelerı kullanabileceğini gör
-# sep() ; iki string arasına boşluk konulmasını istediğimizde
+# Fonksiyonları biçimlendirmek için ?print gibi yaz ve neleri kullanabileceğini gör
+# sep() ; iki string arasına boşluk konulmasını istediğimizde veya ne istersen
 print("a", "b")
 print("a", "b", sep="__")
 
@@ -7,7 +7,6 @@ print("a", "b", sep="__")
 # fonksiyon tanımlama
 def calculate(x):
     print(x * 2)
-
 
 calculate(5)
 
@@ -93,7 +92,7 @@ def divide(a, b):
 divide(1, 2)
 
 
-# bazı arg çn tanımlı değer ekleyerek kullanıcılar her arg girmese dahi çalışmasını sağlarız
+# bazı arg için tanımlı değer ekleyerek kullanıcılar her bir arg girmese dahi çalışmasını sağlarız
 def divide(a, b=1):
     print(a / b)
 
@@ -432,7 +431,7 @@ for n in numbers:
 #bir veri setindeki değişken isimlerini değiştirmek
 
 #bir kütüphaneyi (örneğin seaborn) import etmek için; import seaborn as sns
-#.columns: ilgili data framein değişkenlerinin ismi gelir.
+#.columns: ilgili data frame değişkenlerininin ismi gelir.
 import seaborn as sns
 df = sns.load_dataset("car_crashes" )
 df.columns
